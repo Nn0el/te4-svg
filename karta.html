@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>karta</title>
+    <style>
+        /* Grundläggande styling */
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        .klassrum {
+            fill: #707070;
+            stroke: #333;
+            stroke-width: 1;
+            cursor: pointer;
+            transition: fill 0.3s;
+        }
+        .klassrum:hover {
+            fill: #2fa53f;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            display: none;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Välkommen till NTI gymnasiet Umeå</h1>
+
+
+
+    <!-- SVG-karta -->
+    <!-- Klistra in din SVG-karta här och se till att varje klassrum har en klass "klassrum" och ett unikt id -->
+    
+   
+
+
+
+
+
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 290">
+
+        <path id="Elev_ingång" class="korridor klassrum" ListId=klassrumList[0] d="M170 35h20v125h15v60h-7v-45h-33v20h-10v-20h-10v-40v75h-40v-25h20v-60h52v5v-80h-7v-15z"/>
+<path id="Lärar_ingång" class="korridor klassrum" d="M90 235h65v-20h65v20h-15v20h-145h20v10h-30v-10h-15v-40h8v-5h7v5h10v30h30v-10z" />
+<path id="Toalett_atena" class="toa klassrum" d="M155 35h15v8h-15h15v7h-15v-15z"/>
+<path id="Toalett_Elevingång" class="toa klassrum" d="M 165 175h33v10h-8v-10v10h-8v-10v10h-9v-10v10h-8v-10z"/>
+<path id="Toalett_Läraringång" class="toa klassrum" d="M90 215h25v20h-10v-11h10h-10v-9v20h-5v-11h-10h10v-9v20h-10v-20z"/>
+<rect id="Toalett_rullstol_elev" class="toa klassrum" x="165" y="185" width="15" height="10" />
+<rect id="Toalett_rullstol_lärar" class="toa klassrum" x="40" y="255" width="10" height="10" onclick=""/>
+<path id="Pythagoras" class="klassrum" d="M 155 10 l 30 0 l 0 25 l -30 0 l 0 -25 Z" />
+<path id="Atena" class="klassrum" d="M 185 10 l 35 0 l 0 50 l -30 0 l 0 -25 l -5 0 l 0 -25 Z" />
+<rect id="Ariståteles" class="klassrum" x="125" y="50" width="52" height="35" />
+<rect id="Sokrates" class="klassrum" x="145" y="85" width="32" height="20" />
+<rect id="Lärarrum" class="klassrum" x="145" y="105" width="32" height="20" />
+<rect id="Nyx" class="klassrum" x="125" y="85" width="20" height="40" />
+<rect id="Troja" class="klassrum" x="190" y="60" width="30" height="50" />
+<rect id="Platon" class="klassrum" x="190" y="110" width="30" height="50" />
+<rect id="Platon" class="klassrum" x="205" y="160" width="15" height="10" />
+<rect id="Helios" class="klassrum" x="205" y="170" width="15" height="40" />
+<rect id="Hera" class="klassrum" x="205" y="235" width="15" height="15" />
+<path id="Sapfo" class="klassrum" d="M 205 250 l 15 0 l 0 35 l -35 0 l 0 -30 l 20 0 l 0 -5 " />
+<rect id="Hermes" class="klassrum" x="155" y="255" width="30" height="30" />
+<rect id="Hera" class="klassrum" x="130" y="255" width="25" height="30" />
+<rect id="Arkimedes" class="klassrum" x="95" y="255" width="35" height="30" />
+<rect id="Kemiföråd" class="klassrum" x="80" y="255" width="15" height="30" />
+<rect id="Hippokrates" class="klassrum" x="65" y="265" width="15" height="20" />
+<rect id="Zeus" class="klassrum" x="45" y="265" width="20" height="20" />
+<rect id="ALC" class="klassrum" x="35" y="185" width="70" height="25" />
+<rect id="Server_rum" class="klassrum" x="145" y="215" width="10" height="20"/>
+<rect id="admin" class="klassrum" x="125" y="215" width="20" height="20"/>
+<rect id="Kopieringsrum" class="klassrum" x="115" y="215" width="10" height="20"/>
+<rect id="Elevkök" class="klassrum" x="105" y="210" width="20" height="5" />
+</svg>
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip" ListId="tooltip"></div>
+
+    <script>
+        // JavaScript för interaktivitet
+        const klassrums = document.querySelectorAll('.klassrum');
+        const tooltip = document.getElementById('tooltip');
+        let ListId = document.querySelectorAll('.klassrum')
+        const klassrumList = ["Ingången som används av mestadels elever", "Denna ingång används mestadels av lärare pågrund av att den ligger nära till lärarnas rum", "Två stycken toaletter vid Atena",
+            "Fyra stycken toaletter vid elevingången", "Fyra stycken toaletter vid läraringången", "Handikappstoaletten vid elevingången", "Handikappstoaletten vid läraringången",
+            "Pythagoras är där vi har vårat makerspace", "Atena är ", "Aristoteles är ett unikt klassrum och man kan gå in i fotostudion här ifrån", "Sokrates är", "Lärarrummet", 
+            "Nyx är", "Troja är", "Platon är", "va heter dehär stället?", "Helios är en plats för elever att hänga under raster", "Hera är", "Arkimedes är våran kemisal", "I kemiförådet förvaras saker som behövs för att labba",
+            "Hippokrates är", "Zeus är kontoret för TE4", "ALC är ett specciellt klassrum med fyra stycken projektorer som är riktigt bra för grupparbeten", "Skolans server körs här (tror jag)",
+            "Admins kontor", "Kopieringsrummet", "Elevkök med mikrovågsugn och vattenkokare"
+        ]
+        klassrums.forEach(klassrum => {
+            klassrum.addEventListener('mouseover', (e) => {
+                const klassrumName = klassrum.id.replace('_', ' ').toUpperCase();
+             
+                tooltip.style.display = 'block';
+                tooltip.textContent = klassrumName;
+            });
+
+            klassrum.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY + 10 + 'px';
+            });
+
+            klassrum.addEventListener('mouseout', () => {
+                tooltip.style.display = 'none';
+            });
+
+            klassrum.addEventListener('click', () => {
+                console.log(klassrumList)
+                console.log(ListId)
+                alert([klassrumList] + 'Du klickade på ' + klassrum.id.replace('_', ' ').toUpperCase());
+
+                // Här kan ni lägga till mer avancerad funktionalitet, som att visa information i en sidopanel
+            });
+        });
+    </script>
+
+</body>
+</html>
